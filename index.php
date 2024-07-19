@@ -16,11 +16,12 @@
  ?>
 
 <!DOCTYPE html>
-<lang="en">
+<html lang="en">
     <head>
         <meta charset = "utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Exercise 1</title>
+        <!-- icon does not work for some reason -->
         <link rel="icon" href="dist/img/logo.ico" type="image/x-icon" />
 
         <!-- all the imports from the plugins -->
@@ -30,6 +31,22 @@
         <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
         <!-- Theme style -->
         <link rel="stylesheet" href="dist/css/adminlte.min.css">
+        <!-- overlayScrollbars -->
+        <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+        <!-- Sweet Alert -->
+        <link rel="stylesheet" href="../../plugins/sweetalert2/dist/sweetalert2.min.css">
+        <style>
+            .margin20 {
+                margin:20px;
+            }
+            .colorgray {
+                background-color: #e9ecef;
+            }
+            #widthheight200 {
+                width:200px;
+                height:200px;
+            }
+        </style>
     </head>
     <body>
         <!-- whole login box -->
@@ -72,18 +89,8 @@
     <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="dist/js/adminlte.min.js"></script>
+    <!-- sweet alert 2 -->
+    <script src="plugins/sweetalert2/dist/sweetalert2.all.js"></script>
 
     <!-- there should be no script here, but ignore for now -->
-<style>
-    .margin20 {
-        margin:20px;
-    }
-    .colorgray {
-        background-color: #e9ecef;
-    }
-    #widthheight200 {
-        width:200px;
-        height:200px;
-    }
-</style>
 </html>

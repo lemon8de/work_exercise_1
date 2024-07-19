@@ -14,15 +14,15 @@
         <meta charset = "utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Exercise 1</title>
-        <link rel="icon" href="dist/img/logo.ico" type="image/x-icon" />
+        <link rel="icon" href="/dist/img/logo.ico" type="image/x-icon" />
 
         <!-- all the imports from the plugins -->
         <!-- Google Font: Source Sans Pro -->
-        <link rel="stylesheet" href="dist/css/font.min.css">
+        <link rel="stylesheet" href="/dist/css/font.min.css">
         <!-- Font Awesome -->
-        <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+        <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
         <!-- Theme style -->
-        <link rel="stylesheet" href="dist/css/adminlte.min.css">
+        <link rel="stylesheet" href="/dist/css/adminlte.min.css">
     </head>
     <body>
         <h1>Hello <?php echo $_SESSION['name'] . ' of role ' . $_SESSION['role']?></h1>

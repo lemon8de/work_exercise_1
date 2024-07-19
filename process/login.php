@@ -1,4 +1,5 @@
 <?php 
+echo 'login.php';
 //starting sessions
 session_name("exercise_1");
 session_start();
@@ -39,11 +40,17 @@ if (isset($_POST['Login'])) {
             }
         } 
     }else{
-        echo '
+        echo "
         <script>
-            alert("sign in faled");
+            Swal.fire({
+                icon: 'error',
+                title: 'Error !!!',
+                text: 'Error',
+                showConfirmButton: false,
+                timer: 2000
+            });
         </script> 
-        ';
+        ";
     }
 
 } else {
