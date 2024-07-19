@@ -1,5 +1,4 @@
 <?php 
-echo 'login.php';
 //starting sessions
 session_name("exercise_1");
 session_start();
@@ -31,6 +30,7 @@ if (isset($_POST['Login'])) {
             $_SESSION['section'] = $x['section'];
             $_SESSION['role'] = $x['role'];
 
+            //this the last check to know where to send the user
             if ($role == 'ADMIN') {
                 header('location: page/admin/dashboard.php');
                 exit;
@@ -42,13 +42,7 @@ if (isset($_POST['Login'])) {
     }else{
         echo "
         <script>
-            Swal.fire({
-                icon: 'error',
-                title: 'Error !!!',
-                text: 'Error',
-                showConfirmButton: false,
-                timer: 2000
-            });
+            alert('sign in failed');
         </script> 
         ";
     }
@@ -59,7 +53,6 @@ if (isset($_POST['Login'])) {
 
 //logout code, called by a button with name Logout
 if (isset($_POST['Logout'])) {
-    echo 'what';
     session_unset();
     session_destroy();
     header('location: /exercise_1/');

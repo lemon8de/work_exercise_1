@@ -19,5 +19,3 @@
     </div>
   </div>
 </form>
-
-<h1>logout modal loaded</h1>
