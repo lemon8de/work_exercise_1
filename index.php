@@ -22,9 +22,27 @@
         <meta charset = "utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Exercise 1</title>
+        <link rel="icon" href="dist/img/logo.ico" type="image/x-icon" />
+
+        <!-- all the imports from the plugins -->
+        <!-- Google Font: Source Sans Pro -->
+        <link rel="stylesheet" href="dist/css/font.min.css">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="dist/css/adminlte.min.css">
     </head>
     <body>
-
+<h1>hello world</h1>
     </body>
 
+    <!-- third party scripts -->
+    <!-- jQuery -->
+    <script src="plugins/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/adminlte.min.js"></script>
+
+    <!-- there should be no script here, but ignore for now -->
 </html>
