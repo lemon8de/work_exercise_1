@@ -46,7 +46,18 @@ if (isset($_POST['Login'])) {
         ';
     }
 
-}else {
-    echo 'should do nothing';
+} else {
+    ;
+}
+
+//logout code, called by a button with name Logout
+if (isset($_POST['Logout'])) {
+    echo 'what';
+    session_unset();
+    session_destroy();
+    header('location: /exercise_1/');
+    exit;
+} else {
+    ;
 }
 ?>
