@@ -33,7 +33,7 @@
     </head>
     <body>
         <!-- whole login box -->
-        <div class="login-box debug-color-green mx-auto">
+        <div class="login-box mx-auto">
             <!-- split the login box as picture and the form login -->
             <div class="login-logo">
                 <img src="dist/img/logo.png" id="login_logo">
@@ -45,13 +45,16 @@
                     <!-- login form complete -->
                     <form action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST" id="login_form">
                         <div class="form-group">
-                            <label for="usernameInput">Username</label>
-                            <input type="text" class="form-control" id="usernameInput" aria-describedby="usernameHelp" placeholder="Username...">
-                            <!-- <small id="usernameHelp" class="form-text text-muted">Username provided on your account</small> -->
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="usernameInput" aria-describedby="usernameHelp" placeholder="Username" required>
+                                <div class="input-group-append"><div class="input-group-text"><span class="fas fa-user"></span></div></div>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label for="passwordInput">Password</label>
-                            <input type="password" class="form-control" id="passwordInput" aria-describedby="passwordHelp" placeholder="Password...">
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="passwordInput" aria-describedby="passwordHelp" placeholder="Password" required>
+                                <div class="input-group-append"><div class="input-group-text"><span class="fas fa-lock"></span></div></div>
+                            </div>
                             <small id="passwordHelp" class="form-text text-muted">Inquire at management for password reset</small>
                         </div>
                         <button type="submit" class="btn bg-primary btn-block" name="login" value="login">Login</button>
