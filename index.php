@@ -36,11 +36,11 @@
         <div class="login-box mx-auto">
             <!-- split the login box as picture and the form login -->
             <div class="login-logo">
-                <img src="dist/img/logo.png" id="login_logo">
+                <img src="dist/img/logo.png" id="widthheight200">
                 <h2>Exercise 1: Code rewrite</h2>
             </div>
             <div class="card">
-                <div class="login-form">
+                <div class="margin20">
                     <p class="login-box-msg text-muted">Sign in to start your session</p>
                     <!-- login form complete -->
                     <form action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST" id="login_form">
@@ -77,14 +77,13 @@
 </html>
 
 <style>
-    .login-form {
+    .margin20 {
         margin:20px;
     }
-    body {
+    .colorgray {
         background-color: #e9ecef;
     }
-
-    #login_logo {
+    #widthheight200 {
         width:200px;
         height:200px;
     }
