@@ -11,8 +11,7 @@
             exit;
         }
     } else {
-        echo 'php elsed on the loging screen';
-        echo 'possible issues is the login if statements are all falsed';
+        ;
     }
  ?>
 
@@ -34,20 +33,32 @@
     </head>
     <body>
         <!-- whole login box -->
-        <div class="login-box debug-size-big-rectangle-portrait debug-color-green">
+        <div class="login-box debug-color-green mx-auto">
             <!-- split the login box as picture and the form login -->
-             <div class="login-logo debug-color-red debug-size-square-small"></div>
-             <div class="login-form">
-
-                <!-- login form complete -->
-                <form action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST" id="login_form">
-                    <input type="text">
-                    <input type="text">
-                    <button type="submit" class="btn bg-primary btn-block" name="login" value="login">Login</button>
-                    <button type="submit" class="btn bg-danger btn-block" name="work_instruction" value="work_instruction">Work Instruction</button>
-                </form>
-
-             </div>
+            <div class="login-logo">
+                <img src="dist/img/logo.png" id="login_logo">
+                <h2>Exercise 1: Code rewrite</h2>
+            </div>
+            <div class="card">
+                <div class="login-form">
+                    <p class="login-box-msg text-muted">Sign in to start your session</p>
+                    <!-- login form complete -->
+                    <form action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST" id="login_form">
+                        <div class="form-group">
+                            <label for="usernameInput">Username</label>
+                            <input type="text" class="form-control" id="usernameInput" aria-describedby="usernameHelp" placeholder="Username...">
+                            <!-- <small id="usernameHelp" class="form-text text-muted">Username provided on your account</small> -->
+                        </div>
+                        <div class="form-group">
+                            <label for="passwordInput">Password</label>
+                            <input type="password" class="form-control" id="passwordInput" aria-describedby="passwordHelp" placeholder="Password...">
+                            <small id="passwordHelp" class="form-text text-muted">Inquire at management for password reset</small>
+                        </div>
+                        <button type="submit" class="btn bg-primary btn-block" name="login" value="login">Login</button>
+                        <button type="submit" class="btn bg-danger btn-block" name="work_instruction" value="work_instruction">Work Instruction</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </body>
 
@@ -63,22 +74,15 @@
 </html>
 
 <style>
-    .debug-color-red {
-        background-color: red;
+    .login-form {
+        margin:20px;
     }
-    
-    .debug-color-green {
-        background-color: green;
-    }
-
-    .debug-size-square-small {
-        width:100px;
-        height:100px;
+    body {
+        background-color: #e9ecef;
     }
 
-    .debug-size-big-rectangle-portrait {
-        width: 200px;
-        height:400px;
+    #login_logo {
+        width:200px;
+        height:200px;
     }
-
 </style>
