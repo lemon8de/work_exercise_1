@@ -33,7 +33,22 @@
         <link rel="stylesheet" href="dist/css/adminlte.min.css">
     </head>
     <body>
-<h1>hello world</h1>
+        <!-- whole login box -->
+        <div class="login-box debug-size-big-rectangle-portrait debug-color-green">
+            <!-- split the login box as picture and the form login -->
+             <div class="login-logo debug-color-red debug-size-square-small"></div>
+             <div class="login-form">
+
+                <!-- login form complete -->
+                <form action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST" id="login_form">
+                    <input type="text">
+                    <input type="text">
+                    <button type="submit" class="btn bg-primary btn-block" name="login" value="login">Login</button>
+                    <button type="submit" class="btn bg-danger btn-block" name="work_instruction" value="work_instruction">Work Instruction</button>
+                </form>
+
+             </div>
+        </div>
     </body>
 
     <!-- third party scripts -->
@@ -46,3 +61,24 @@
 
     <!-- there should be no script here, but ignore for now -->
 </html>
+
+<style>
+    .debug-color-red {
+        background-color: red;
+    }
+    
+    .debug-color-green {
+        background-color: green;
+    }
+
+    .debug-size-square-small {
+        width:100px;
+        height:100px;
+    }
+
+    .debug-size-big-rectangle-portrait {
+        width: 200px;
+        height:400px;
+    }
+
+</style>
