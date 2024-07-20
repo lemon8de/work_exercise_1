@@ -22,7 +22,6 @@
             </div>
         </div>
     </div>
-
     <!-- Sidebar Menu -->
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -39,7 +38,7 @@
             </li>
 
             <li class="nav-item">
-                <?php include 'logout.php';?>
+                <?php include '../../logout.php';?>
             </li>
       </ul>
     </nav>
