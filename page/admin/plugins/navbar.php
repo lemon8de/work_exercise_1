@@ -2,9 +2,9 @@
 //SESSION
 include ('../../process/login.php');
 
-//if ($_SESSION['role'] <> 'ADMIN') {
-    //header('location: ../../index.php');
-//}
+if ($_SESSION['role'] <> 'ADMIN') {
+    header('location: ../../index.php');
+}
 ?> 
 
 <!DOCTYPE html>
@@ -26,6 +26,7 @@ include ('../../process/login.php');
         <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
         <!-- Sweet Alert -->
         <link rel="stylesheet" href="../../plugins/sweetalert2/dist/sweetalert2.min.css">
+        <link rel="stylesheet" href="../../plugins/datatables/datatables.css"/>
     </head>
     <body class="hold-transition sidebar-mini layout-fixed">
         <div class="wrapper">

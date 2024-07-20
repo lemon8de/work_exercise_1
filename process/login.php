@@ -45,12 +45,7 @@ if (isset($_POST['Login'])) {
         //why does this not work?
         echo "
         <script>
-            Swal.fire({
-                title: 'Error!',
-                text: 'Do you want to continue',
-                icon: 'error',
-                confirmButtonText: 'Cool'
-            });
+            alert('sign in failed');
         </script>
         ";
     }
