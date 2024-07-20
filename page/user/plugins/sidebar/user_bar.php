@@ -17,7 +17,7 @@
             </div>
             <div class="col-sm-9">
                 <div class="info">
-                    <a href="dashboard.php" class="d-block"><?=htmlspecialchars($_SESSION['name']) . '</br>' . $_SESSION['section'] . ' | ' . $_SESSION['position'];?></a>
+                    <a href="dashboard.php" class="d-block"><?=htmlspecialchars($_SESSION['name']) . '</br>' . $_SESSION['id_number'] . '</br>' . $_SESSION['section'] . ' | ' . $_SESSION['position'];?></a>
                 </div>
             </div>
         </div>
@@ -26,7 +26,7 @@
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
-                <a href="dashboard.php" class="nav-link active"><i class="nav-icon fas fa-bus"></i><p>Details</p></a>
+                <a href="dashboard.php" class="nav-link"><i class="nav-icon fas fa-address-book"></i><p>Details</p></a>
             </li>
 
             <li class="nav-item">

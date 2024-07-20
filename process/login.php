@@ -14,7 +14,7 @@ if (isset($_POST['Login'])) {
     $password = $_POST['passwordInput'];
 
     //prepare the query
-    $sql = "SELECT full_name, section, position, role FROM user_accounts WHERE BINARY username = ? AND BINARY password = ?";
+    $sql = "SELECT id_number, full_name, section, position, role FROM user_accounts WHERE BINARY username = ? AND BINARY password = ?";
     // from what i can deduce, we will take these columns from the user accounts table, WHERES to pinpoint the exact 'row' or data log, the ? are just placeholders for the next lines of code
     // link the sql query and the sql database together??
     $stmt = $conn->prepare($sql);
@@ -26,6 +26,7 @@ if (isset($_POST['Login'])) {
         //there is a foreach here because this might return an array or something, but honestly this will only run once
         foreach($stmt->fetchAll() as $x) {
             $_SESSION['username'] = $username;
+            $_SESSION['id_number'] = $x['id_number'];
             $_SESSION['name'] = $x['full_name'];
             $_SESSION['section'] = $x['section'];
             $_SESSION['position'] = $x['position'];
