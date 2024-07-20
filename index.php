@@ -22,7 +22,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Exercise 1</title>
         <!-- icon does not work for some reason -->
-        <link rel="icon" href="dist/img/logo.ico" type="image/x-icon" />
+        <link rel="icon" href="dist/img/logo_ico.ico" type="image/x-icon" />
 
         <!-- all the imports from the plugins -->
         <!-- Google Font: Source Sans Pro -->

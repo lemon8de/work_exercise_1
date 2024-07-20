@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
   <a href="dashboard.php" class="brand-link">
-    <img src="../../dist/img/logo.ico" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <img src="../../dist/img/logo_ico.ico" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
     <span class="brand-text font-weight-light">Portal | User</span>
   </a>
 
@@ -38,5 +38,5 @@
             </li>
       </ul>
     </nav>
-  </div> <!-- this closes the div wraper in the navbar.php -->
 </aside>
+</div> <!-- this closes the div wraper in the navbar.php -->
