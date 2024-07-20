@@ -60,7 +60,7 @@
                 <div class="margin20">
                     <p class="login-box-msg text-muted">Sign in to start your session</p>
                     <!-- login form complete -->
-                    <form action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST" id="login_form">
+                    <form action="" method="POST" id="login_form">
                         <div class="form-group">
                             <div class="input-group">
                                 <input type="text" class="form-control" id="usernameInput" name="usernameInput" placeholder="Username" required>
@@ -75,8 +75,9 @@
                             <small id="passwordHelp" class="form-text text-muted">Inquire at management for password reset</small>
                         </div>
                         <button type="submit" class="btn bg-primary btn-block" name="Login" value="Login">Login</button>
-                        <button type="submit" class="btn bg-danger btn-block" name="Work_Instruction" value="Work_Instruction">Work Instruction</button>
                     </form>
+                    <button type="submit" class="btn bg-info btn-block mt-2" name="View_Only" value="View_Only">View Only</button>
+                    <button type="submit" class="btn bg-danger btn-block mt-2" name="Work_Instruction" value="Work_Instruction">Work Instruction</button>
                 </div>
             </div>
         </div>
@@ -89,8 +90,8 @@
     <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="dist/js/adminlte.min.js"></script>
-    <!-- sweet alert 2 -->
-    <script src="plugins/sweetalert2/dist/sweetalert2.all.js"></script>
+    <!-- SweetAlert2 -->
+    <script type="text/javascript" src="/plugins/sweetalert2/dist/sweetalert2.min.js"></script>
 
     <!-- there should be no script here, but ignore for now -->
 </html>

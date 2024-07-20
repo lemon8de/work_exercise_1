@@ -27,5 +27,26 @@ if ($_SESSION['role'] <> 'ADMIN') {
         <!-- Sweet Alert -->
         <link rel="stylesheet" href="../../plugins/sweetalert2/dist/sweetalert2.min.css">
     </head>
-    <body>
-        <h1>this is part of the navbar php</h1>
+    <body class="hold-transition sidebar-mini layout-fixed">
+        <div class="wrapper">
+
+        <!-- removed preloader here  -->
+
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>
+            </ul>
+
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                    <i class="fas fa-expand-arrows-alt"></i>
+                </a>
+                </li>
+            </ul>
+        </nav>

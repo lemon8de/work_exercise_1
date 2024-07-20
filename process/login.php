@@ -28,6 +28,7 @@ if (isset($_POST['Login'])) {
             $_SESSION['username'] = $username;
             $_SESSION['name'] = $x['full_name'];
             $_SESSION['section'] = $x['section'];
+            $_SESSION['position'] = $x['position'];
             $_SESSION['role'] = $x['role'];
 
             //this the last check to know where to send the user
@@ -40,10 +41,16 @@ if (isset($_POST['Login'])) {
             }
         } 
     }else{
+        //why does this not work?
         echo "
         <script>
-            alert('sign in failed');
-        </script> 
+            Swal.fire({
+                title: 'Error!',
+                text: 'Do you want to continue',
+                icon: 'error',
+                confirmButtonText: 'Cool'
+            });
+        </script>
         ";
     }
 
