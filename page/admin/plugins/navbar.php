@@ -1,6 +1,6 @@
 <?php 
 //SESSION
-include ($_SERVER['DOCUMENT_ROOT'] . '/exercise_1' . '/process/login.php');
+include ('../../process/login.php');
 
 //if ($_SESSION['role'] <> 'ADMIN') {
     //header('location: ../../index.php');
