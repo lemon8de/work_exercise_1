@@ -1,10 +1,10 @@
 <?php 
 //SESSION
-include '../../process/login.php';
-//some code for testing the session and ensuring that the user is logged in
-if ($_SESSION['role'] <> 'ADMIN') {
-    header('location: ../../index.php');
-}
+include ($_SERVER['DOCUMENT_ROOT'] . '/exercise_1' . '/process/login.php');
+
+//if ($_SESSION['role'] <> 'ADMIN') {
+    //header('location: ../../index.php');
+//}
 ?> 
 
 <!DOCTYPE html>

@@ -33,19 +33,15 @@
                 <a href="#" class="nav-link"><i class="nav-icon far fa-envelope"></i><p>Alerts<i class="fas fa-angle-left right"></i></p></a>
                 <ul class="nav nav-treeview" style="display: block;">
                     <li class="nav-item">
-                        <a href="alert/view.html" class="nav-link"><i class="fas fa-book nav-icon"></i><p>View</p></a>
+                        <a href="alert/view.php" class="nav-link"><i class="fas fa-book nav-icon"></i><p>View</p></a>
                     </li>
                     <li class="nav-item">
-                        <a href="mailbox/create.html" class="nav-link"><i class="fas fa-plus nav-icon"></i><p>Create</p></a>
+                        <a href="alert/create.php" class="nav-link"><i class="fas fa-plus nav-icon"></i><p>Create</p></a>
                     </li>
                     <li class="nav-item">
-                        <a href="mailbox/dismiss.html" class="nav-link"><i class="fas fa-times nav-icon"></i><p>Dismiss</p></a>
+                        <a href="alert/dismiss.php" class="nav-link"><i class="fas fa-times nav-icon"></i><p>Dismiss</p></a>
                     </li>
                 </ul>
-            </li>
-
-            <li class="nav-item">
-                <a href="sample1.php" class="nav-link"><i class="nav-icon fas fa-user-cog"></i><p>Sample 1</p></a>
             </li>
 
             <li class="nav-item">
