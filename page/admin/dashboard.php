@@ -7,4 +7,4 @@
     </div>
 </div>
 
-<?php include 'plugins/footer.php';?>
+<?php include '../../footer.php';?>

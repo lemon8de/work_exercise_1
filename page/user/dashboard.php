@@ -1,5 +1,5 @@
 <?php include 'plugins/navbar.php';?>
-<?php include 'plugins/sidebar/admin_bar.php';?>
+<?php include 'plugins/sidebar/user_bar.php';?>
 
 <div class="content-wrapper">
     <div class="container">
@@ -7,4 +7,4 @@
     </div>
 </div>
 
-<?php include 'plugins/footer.php';?>
+<?php include '../../footer.php';?>
