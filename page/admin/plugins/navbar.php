@@ -27,6 +27,8 @@ if ($_SESSION['role'] <> 'ADMIN') {
         <!-- Sweet Alert -->
         <link rel="stylesheet" href="../../plugins/sweetalert2/dist/sweetalert2.min.css">
         <link rel="stylesheet" href="../../plugins/datatables/datatables.css"/>
+
+
     </head>
     <body class="hold-transition sidebar-mini layout-fixed">
         <div class="wrapper">
