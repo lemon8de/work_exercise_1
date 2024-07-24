@@ -23,7 +23,7 @@
                     </div>
                     <div class="card-body">
                         <?php include '../../process/user_get.php';?>
-                        <p class="text-muted">All information should be correct, changes must be done at the Account Management Page</p>
+                        <p class="text-muted text-center">All information should be correct, changes must be done at the Account Management Page</p>
                     </div>
                 </div>
             </div>
