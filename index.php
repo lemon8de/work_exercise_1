@@ -32,9 +32,9 @@
         <!-- Theme style -->
         <link rel="stylesheet" href="dist/css/adminlte.min.css">
         <!-- overlayScrollbars -->
-        <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+        <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
         <!-- Sweet Alert -->
-        <link rel="stylesheet" href="../../plugins/sweetalert2/dist/sweetalert2.min.css">
+        <link rel="stylesheet" href="plugins/sweetalert2/dist/sweetalert2.min.css">
         <style>
             .margin20 {
                 margin:20px;
@@ -91,7 +91,7 @@
     <!-- AdminLTE App -->
     <script src="dist/js/adminlte.min.js"></script>
     <!-- SweetAlert2 -->
-    <script type="text/javascript" src="/plugins/sweetalert2/dist/sweetalert2.min.js"></script>
+    <script type="text/javascript" src="plugins/sweetalert2/dist/sweetalert2.min.js"></script>
 
     <!-- there should be no script here, but ignore for now -->
 </html>

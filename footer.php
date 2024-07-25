@@ -9,6 +9,7 @@
 <?php
 //MODALS
 include '../../modals/logout_modal.php';
+include '../../modals/confirm_alert_post.php';
 ?>
 <!-- scripts from the web template -->
 <!-- jQuery -->

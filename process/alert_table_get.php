@@ -6,6 +6,7 @@ echo '
         <thead>
             <tr>
                 <th>Employee ID</th>
+                <th>Employee Name</th>
                 <th>With Concern</th>
                 <th>Date Issued</th>
                 <th>Dismissed</th>
@@ -13,7 +14,10 @@ echo '
         </thead>
         <tbody>';
 
-$sql = "SELECT id_number, from_user, date_created, dismissed FROM user_alerts";
+$sql = "SELECT user_alerts.id_number, user_accounts.full_name, user_alerts.from_user, user_alerts.date_created, user_alerts.dismissed
+        FROM user_alerts
+        LEFT JOIN user_accounts
+        ON user_alerts.id_number = user_accounts.id_number";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 if ($stmt->rowCount() > 0) {
@@ -22,6 +26,7 @@ if ($stmt->rowCount() > 0) {
         echo "
         <tr>
             <td>" . $x['id_number'] . "</td>
+            <td>" . $x['full_name'] . "</td>
             <td>" . $x['from_user'] . "</td>
             <td>" . $x['date_created'] . "</td>
             <td>" . $boolean . "</td>
