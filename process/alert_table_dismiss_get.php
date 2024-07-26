@@ -1,6 +1,4 @@
 <?php 
-echo "<script src='../../plugins/jquery/dist/jquery.min.js'></script>";
-echo "<script src='../../plugins/datatables/datatables.js'></script>";
 echo '
     <table id="example" class="display" style="width:100%">
         <thead>
@@ -19,8 +17,7 @@ $sql = "SELECT user_alerts.id_number, user_accounts.full_name, user_alerts.from_
         LEFT JOIN user_accounts
         ON user_alerts.id_number = user_accounts.id_number
         LEFT JOIN withconcern_masterlist
-        ON user_alerts.from_user = withconcern_masterlist.from_user
-        ORDER BY user_alerts.date_created DESC";
+        ON user_alerts.from_user = withconcern_masterlist.from_user";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 if ($stmt->rowCount() > 0) {
@@ -39,9 +36,8 @@ if ($stmt->rowCount() > 0) {
 }else{
     ;
 }
-        echo '
-            </tbody>
-        </table>
-        ';
-        echo "<script>table = new DataTable('#example');</script>";
+    echo '
+        </tbody>
+    </table>
+    ';
 ?>

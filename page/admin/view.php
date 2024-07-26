@@ -7,7 +7,7 @@
                 <div class="col-sm-12">
                     <div class="card card-gray-dark card-outlined">
                         <div class="card-header">
-                            <h3 class="card-title">Alerts</h3>
+                            <h3 class="card-title">Viewing Alerts</h3>
                             <!-- <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                     <i class="fas fa-minus"></i>
@@ -24,6 +24,7 @@
                 </div>
             </div>
         </div>
+    </div>
 </div>
 
 <?php include '../../footer.php';?>

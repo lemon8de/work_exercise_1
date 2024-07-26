@@ -186,10 +186,21 @@
                 dataType: 'json',
                 success: function (response) {
                     if (response.success) {
-                        console.log(response);
+                        //check health
+                        //console.log(response);
+                        $('#confirm_alert_post').modal('hide');
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Succesfully Recorded!!!',
+                            text: 'Success',
+                            showConfirmButton: false,
+                            timer: 1000
+                        });
+                        // FATAL ON LAUNCH: hardcoded web address (JAY)
+                        setTimeout(() => window.location.href = "http://172.25.112.100/exercise_1/page/admin/view.php", 1000);
                     } else {
                         //handle errors
-                        alert('error');
+                        alert(response);
                     }
                 }
             });
