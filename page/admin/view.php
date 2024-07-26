@@ -60,6 +60,11 @@
                                         <?php include '../../process/alert_table_get.php';?>
                                     </div>
                                 </div>
+                                <div class="row mt-1 mb-1">
+                                    <div class="col-sm-2 mx-auto">
+                                        <button type="button" class="btn btn-block btn-secondary" onclick="">Load More</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -79,6 +84,8 @@
             'emp_id': employee_id,
             'full_name': employee_name,
             'from_user': with_concern,
+            'limit_start': 0,
+            'limit_end': 10
         };
         //check health
         //console.log(request_body);

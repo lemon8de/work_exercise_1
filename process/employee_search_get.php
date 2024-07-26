@@ -27,9 +27,9 @@
                 </tr>
             ";
         }
-        }else{
-            ;
-        }
+    }else{
+        ;
+    }
 
     $return_body['success'] = true;
     echo json_encode($return_body);
