@@ -12,7 +12,7 @@
         <h5 style="text-align:center;">Confirm Alert Submission</h5>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" onclick="createalert()">Submit</button>
+        <button type="button" class="btn btn-primary" onclick="createAlert()">Submit</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>

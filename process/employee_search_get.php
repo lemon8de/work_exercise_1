@@ -8,7 +8,7 @@
     $emp_id .= "%";
 
     //database lookup
-    $sql = "SELECT id_number, full_name, section, position, role, username from user_accounts where id_number like ?";
+    $sql = "SELECT id_number, full_name, section, position, role, username from user_accounts where id_number like ? LIMIT 10";
     $stmt = $conn->prepare($sql);
     $params = array($emp_id,);
     $stmt->execute($params);

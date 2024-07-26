@@ -96,7 +96,28 @@
         </div>
     </div>
 </div>
+
 <script>
+    //keyup variables
+    var typingTimerEmployeeNoSearch; // Timer identifier Employee No Search
+    var doneTypingInterval = 250; // Time in ms
+
+    // On keyup, start the countdown
+    document.getElementById("EmployeeID").addEventListener('keyup', e => {
+        clearTimeout(typingTimerEmployeeNoSearch);
+        typingTimerEmployeeNoSearch = setTimeout(doneTypingSearchAccounts, doneTypingInterval);
+    });
+
+    // On keydown, clear the countdown
+    document.getElementById("EmployeeID").addEventListener('keydown', e => {
+        clearTimeout(typingTimerEmployeeNoSearch);
+    });
+
+    // User is "finished typing," do something
+    function doneTypingSearchAccounts() {
+        employee_search();
+    }
+
     function clickPress(event) {
         if (event.keyCode == 13) {
             var InputBox = document.getElementById("EmployeeID"); 
@@ -128,25 +149,29 @@
                 GeneralAlert.style.display = 'block';
             }
         } else {
-            var EmployeeID = $('#EmployeeID').val();
-            $.ajax({
-                url: '../../process/employee_search_get.php',
-                type: 'GET',
-                data: {
-                    'EmployeeID' : EmployeeID,
-                },
-                dataType: 'json',
-                success: function (response) {
-                    if (response.success) {
-                        var SearchContainer = document.getElementById("SearchQueryTableBody");
-                        SearchContainer.innerHTML = response['innerHTML'];
-                    } else {
-                        //handle errors
-                        //console.log("error");
-                    }
-                }
-            });
+            ;
         }
+    }
+
+    function employee_search() {
+        var EmployeeID = $('#EmployeeID').val();
+        $.ajax({
+            url: '../../process/employee_search_get.php',
+            type: 'GET',
+            data: {
+                'EmployeeID' : EmployeeID,
+            },
+            dataType: 'json',
+            success: function (response) {
+                if (response.success) {
+                    var SearchContainer = document.getElementById("SearchQueryTableBody");
+                    SearchContainer.innerHTML = response['innerHTML'];
+                } else {
+                    //handle errors
+                    //console.log("error");
+                }
+            }
+        });
     }
 
     function proceed() {
@@ -158,7 +183,7 @@
         CreateAlertCardBody.style.display = 'block';
     }
 
-    function createalert() {
+    function createAlert() {
         //gather employee id for query
         emp_id = [];
         var ListItems = document.getElementById("CurrentSearchParameters").querySelectorAll("li")
