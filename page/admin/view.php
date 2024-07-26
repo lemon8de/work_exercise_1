@@ -27,4 +27,10 @@
     </div>
 </div>
 
+<script>
+    function alert_table_click() {
+        console.log(this);
+    }
+</script>
+
 <?php include '../../footer.php';?>

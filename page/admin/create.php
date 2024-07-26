@@ -87,7 +87,7 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-2 ml-auto">
-                                <button type="submit" class="btn btn-block btn-success" data-toggle="modal" data-target="#confirm_alert_post">Submit</button>
+                                <button type="submit" class="btn btn-block btn-success" data-toggle="modal" data-target="#confirm_alert_post_modal">Submit</button>
                             </div>
                         </div>
                     </form>
@@ -188,7 +188,7 @@
                     if (response.success) {
                         //check health
                         //console.log(response);
-                        $('#confirm_alert_post').modal('hide');
+                        $('#confirm_alert_post_modal').modal('hide');
                         Swal.fire({
                             icon: 'success',
                             title: 'Succesfully Recorded!!!',
