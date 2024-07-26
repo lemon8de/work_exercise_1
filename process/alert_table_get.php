@@ -1,6 +1,6 @@
 <?php 
 echo '
-    <table id="example" class="display" style="width:100%">
+    <table id="ViewAlertTable" class="table table-head-fixed text-nowrap table-hover">
         <thead>
             <tr style="border-bottom:1px solid black">
                 <th>Employee ID</th>
