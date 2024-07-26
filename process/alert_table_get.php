@@ -10,7 +10,7 @@ echo '
                 <th>Date Issued</th>
             </tr>
         </thead>
-        <tbody>';
+        <tbody id="AlertTableViewBody">';
 
 $sql = "SELECT user_alerts.id_number, user_accounts.full_name, user_alerts.from_user, user_alerts.content, withconcern_masterlist.contact_person, user_alerts.date_created, user_alerts.dismissed
         FROM user_alerts

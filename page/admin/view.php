@@ -97,12 +97,10 @@
             dataType: 'json',
             success: function (response) {
                 if (response.success) {
-                    console.log("S");
-                    console.log(response);
+                    document.getElementById("AlertTableViewBody").innerHTML = response.new_table;
                 } else {
                     //handle errors
-                    console.log("error");
-                    console.log(response);
+                    ;
                 }
             }
         });

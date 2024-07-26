@@ -9,12 +9,6 @@
     //prepare query and insert into
     require 'conn.php';
 
-
-
-    $return_body['emp_id'] = $emp_id;
-    $return_body['full_name'] = $full_name;
-    $return_body['from_user'] = $from_user;
-
     $sql_partial_start = "SELECT user_alerts.id_number, user_accounts.full_name, user_alerts.from_user, user_alerts.content, withconcern_masterlist.contact_person, user_alerts.date_created, user_alerts.dismissed
       	FROM user_alerts
         LEFT JOIN user_accounts
@@ -29,28 +23,32 @@
     $sql_middle_partial .= !empty($from_user) ? " AND user_alerts.from_user =\"" . $from_user ."\" " :  "";
 
     $sql_partial_end = " ORDER BY user_alerts.date_created DESC LIMIT " . $limit_start . ", " . $limit_end;
+    //column parsing + filtering + pagination
     $sql = $sql_partial_start . $sql_middle_partial . $sql_partial_end;
 
-    // $stmt = $conn->prepare($sql);
-    // $stmt->execute();
-    // if ($stmt->rowCount() > 0) {
-    // foreach($stmt->fetchAll() as $x) {
-    //     echo "
-    //     <tr onclick=\"alert_table_click.call(this)\" style=\"cursor:pointer;\" class=\"modal-trigger\" data-toggle=\"modal\" data-target=\"#alert_table_click_modal\" custom-content=\"" . htmlspecialchars($x['content']) .  "\">
-    //         <td>" . $x['id_number'] . "</td>
-    //         <td>" . $x['full_name'] . "</td>
-    //         <td>" . $x['from_user'] . "</td>
-    //         <td>" . $x['contact_person'] . "</td>
-    //         <td>" . $x['date_created'] . "</td>
-    //     </tr>
-    //     ";
-    // }
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    if ($stmt->rowCount() > 0) {
+    $new_table = "";
+    foreach($stmt->fetchAll() as $x) {
+         $new_table .= "
+         <tr onclick=\"alert_table_click.call(this)\" style=\"cursor:pointer;\" class=\"modal-trigger\" data-toggle=\"modal\" data-target=\"#alert_table_click_modal\" custom-content=\"" . htmlspecialchars($x['content']) .  "\">
+             <td>" . $x['id_number'] . "</td>
+             <td>" . $x['full_name'] . "</td>
+             <td>" . $x['from_user'] . "</td>
+             <td>" . $x['contact_person'] . "</td>
+             <td>" . $x['date_created'] . "</td>
+         </tr>
+         ";
+     }
 
-    // }else{
-    // ;
-    // }
+     }else{
+     ;
+     }
 
     $return_body['success'] = true;
-    $return_body['query'] = $sql;
+    $return_body['new_table'] = $new_table;
+    //DO NOT EXPOSE
+    //$return_body['query'] = $sql;
     echo json_encode($return_body);
 ?>
