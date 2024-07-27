@@ -18,9 +18,9 @@
         WHERE 1=1";
 
     $sql_middle_partial = "";
-    $sql_middle_partial .= !empty($emp_id) ? " AND user_alerts.id_number LIKE \"" . $emp_id . "%\"" : "";
-    $sql_middle_partial .= !empty($full_name) ? " AND user_accounts.full_name LIKE \"" . $full_name ."%\" " :  "";
-    $sql_middle_partial .= !empty($from_user) ? " AND user_alerts.from_user =\"" . $from_user ."\" " :  "";
+    $sql_middle_partial .= !empty($emp_id) ? ' AND user_alerts.id_number LIKE "' . $emp_id . '%"' : '';
+    $sql_middle_partial .= !empty($full_name) ? ' AND user_accounts.full_name LIKE "' . $full_name .'%" ' :  '';
+    $sql_middle_partial .= !empty($from_user) && $from_user <> "ALL" ? ' AND user_alerts.from_user ="' . $from_user .'" ' :  '';
 
     $sql_partial_end = " ORDER BY user_alerts.date_created DESC LIMIT " . $limit_start . ", " . $limit_end;
     //column parsing + filtering + pagination
@@ -29,17 +29,17 @@
     $stmt = $conn->prepare($sql);
     $stmt->execute();
     if ($stmt->rowCount() > 0) {
-    $new_table = "";
+    $new_table = " ";
     foreach($stmt->fetchAll() as $x) {
-         $new_table .= "
-         <tr onclick=\"alert_table_click.call(this)\" style=\"cursor:pointer;\" class=\"modal-trigger\" data-toggle=\"modal\" data-target=\"#alert_table_click_modal\" custom-content=\"" . htmlspecialchars($x['content']) .  "\">
-             <td>" . $x['id_number'] . "</td>
-             <td>" . $x['full_name'] . "</td>
-             <td>" . $x['from_user'] . "</td>
-             <td>" . $x['contact_person'] . "</td>
-             <td>" . $x['date_created'] . "</td>
+         $new_table .= '
+         <tr onclick="alert_table_click.call(this)" style="cursor:pointer;" class="modal-trigger" data-toggle="modal" data-target="#alert_table_click_modal" custom-content="' . htmlspecialchars($x["content"]) . '">
+             <td>' . $x['id_number'] . '</td>
+             <td>' . $x['full_name'] . '</td>
+             <td>' . $x['from_user'] . '</td>
+             <td>' . $x['contact_person'] . '</td>
+             <td>' . $x['date_created'] . '</td>
          </tr>
-         ";
+         ';
      }
 
      }else{
@@ -47,6 +47,7 @@
      }
 
     $return_body['success'] = true;
+    $return_body['row_count'] = $stmt->rowCount();
     $return_body['new_table'] = $new_table;
     //DO NOT EXPOSE
     //$return_body['query'] = $sql;

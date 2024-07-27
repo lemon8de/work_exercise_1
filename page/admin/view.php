@@ -32,37 +32,24 @@
                                         <label>With Concern</label>
                                         <select class="form-control" id="WithConcernSearchInput">
                                             <option value="" selected disabled>Select</option>
+                                            <option value="ALL">All Departments</option>
                                             <?php include '../../process/with_concern_get.php';?>
                                         </select>
                                     </div>
                                     <div class="col-sm-3 mt-auto form-group">
-                                        <button type="button" class="btn btn-block btn-primary" onclick="employeeSearch()">Search</button>
+                                        <button type="button" class="btn btn-block btn-primary" onclick="employeeSearch('filter_search')">Search</button>
                                     </div>
                                 </div>
                                 <div class="row">
-                                <div class="form-inline text-muted">
-                                    <div class="form-group">
-                                        <p>--Pagination Debug Tab-- &nbsp;&nbsp;</p>
-                                    </div>
-                                    <div class="form-group">
-                                        <p>Load More Iterations=</p>
-                                        <p id="LoadMoreIterationPagination">0</p>
-                                        <p>&nbsp;|&nbsp;</p>
-                                    </div>
-                                    <div class="form-group">
-                                        <p>Current Loaded=</p>
-                                        <p id="CurrentLoadedPagination">20</p>
-                                    </div>
-                                </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-12 table-responsive" style="height:300px; overflow:auto; display:inline-block;">
                                         <?php include '../../process/alert_table_get.php';?>
-                                    </div>
+                                    <!--  ending div of col at the include -->
                                 </div>
                                 <div class="row mt-1 mb-1">
                                     <div class="col-sm-2 mx-auto">
-                                        <button type="button" class="btn btn-block btn-secondary" onclick="">Load More</button>
+                                        <button type="button" class="btn btn-block btn-secondary" onclick="employeeSearch('load_more')">Load More</button>
                                     </div>
                                 </div>
                             </div>
@@ -75,20 +62,29 @@
 </div>
 
 <script>
-    function employeeSearch() {
+    function employeeSearch(method) {
         var employee_id = document.getElementById("EmployeeIDSearchInput").value;
         var employee_name = document.getElementById("EmployeeNameSearchInput").value;
         var with_concern = document.getElementById("WithConcernSearchInput").value;
+
+        if (method == "filter_search") {
+            limit_start = 0;
+            limit_end = 50;
+        }else if (method == "load_more") {
+            var current_loaded = document.getElementById("CurrentLoadedPagination").value;
+            limit_start = current_loaded - 1;
+            limit_end = limit_start + 50;
+        }
 
         request_body = {
             'emp_id': employee_id,
             'full_name': employee_name,
             'from_user': with_concern,
-            'limit_start': 0,
-            'limit_end': 10
+            'limit_start': limit_start,
+            'limit_end': limit_end, 
         };
         //check health
-        //console.log(request_body);
+        console.log(request_body);
 
         $.ajax({
             url: '../../process/employee_search_filtered_get.php',
@@ -97,7 +93,14 @@
             dataType: 'json',
             success: function (response) {
                 if (response.success) {
-                    document.getElementById("AlertTableViewBody").innerHTML = response.new_table;
+                    if (method == "filter_search") {
+                        document.getElementById("AlertTableViewBody").innerHTML = response.new_table;
+                        //system critical on the debug menu
+                        document.getElementById("CurrentLoadedPagination").innerHTML = response.row_count;
+                        document.getElementById("AlertTableViewCount").innerHTML = "Showing " + response.row_count + " results";
+                    }else if (method == "load_more") {
+                        ;
+                    }
                 } else {
                     //handle errors
                     ;

@@ -18,20 +18,20 @@ $sql = "SELECT user_alerts.id_number, user_accounts.full_name, user_alerts.from_
         ON user_alerts.id_number = user_accounts.id_number
         LEFT JOIN withconcern_masterlist
         ON user_alerts.from_user = withconcern_masterlist.from_user
-        ORDER BY user_alerts.date_created DESC";
+        ORDER BY user_alerts.date_created DESC LIMIT 50";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 if ($stmt->rowCount() > 0) {
     foreach($stmt->fetchAll() as $x) {
-        echo "
-        <tr onclick=\"alert_table_click.call(this)\" style=\"cursor:pointer;\" class=\"modal-trigger\" data-toggle=\"modal\" data-target=\"#alert_table_click_modal\" custom-content=\"" . htmlspecialchars($x['content']) .  "\">
-            <td>" . $x['id_number'] . "</td>
-            <td>" . $x['full_name'] . "</td>
-            <td>" . $x['from_user'] . "</td>
-            <td>" . $x['contact_person'] . "</td>
-            <td>" . $x['date_created'] . "</td>
+        echo '
+        <tr onclick="alert_table_click.call(this)" style="cursor:pointer;" class="modal-trigger" data-toggle="modal" data-target="#alert_table_click_modal" custom-content="" . htmlspecialchars($x["content"]) .  "">
+            <td>' . $x["id_number"] . '</td>
+            <td>' . $x["full_name"] . '</td>
+            <td>' . $x["from_user"] . '</td>
+            <td>' . $x["contact_person"] . '</td>
+            <td>' . $x["date_created"] . '</td>
         </tr>
-        ";
+        ';
     }
     
 }else{
@@ -40,5 +40,16 @@ if ($stmt->rowCount() > 0) {
     echo '
         </tbody>
     </table>
+    </div>
+    <div class="form-inline text-muted" id="table-debug">
+        <div class="form-group">
+            <p>---[Pagination Debug] &nbsp;</p>
+        </div>
+        <div class="form-group">
+            <p>CurrentLoadedPagination=</p>
+            <p id="CurrentLoadedPagination">' . $stmt->rowCount() . '</p><p>---&nbsp;</p>
+        </div>
+    </div>
+    <p class="text-muted" id="AlertTableViewCount">Showing ' . $stmt->rowCount() .  ' results</p>
     ';
 ?>
