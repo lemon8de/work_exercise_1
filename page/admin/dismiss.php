@@ -5,7 +5,7 @@
     <div class="container-fluid m-1">
         <div class="card card-gray-dark card-outline">
             <div class="card-header">
-                <h3 class="card-title">Viewing Alerts</h3>
+                <h3 class="card-title">Delete Alerts</h3>
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" id="SelectEmployeeButton" data-card-widget="collapse">
                         <i class="fas fa-minus"></i>
@@ -36,6 +36,21 @@
                         </div>
                         <div class="col-sm-3 mt-auto form-group">
                             <button type="button" class="btn btn-block btn-primary" onclick="employeeSearch('filter_search')">Search</button>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-sm-3 form-group">
+                            <label>Start Date</label>
+                            <input type="date" class="form-control" id="StartDateSearchInput">
+                        </div>
+                        <div class="col-sm-3 form-group">
+                            <label>End Date</label>
+                            <input type="date" class="form-control" id="EndDateSearchInput">
+                        </div>
+                        <div class="col-sm-3 form-group">
+                        </div>
+                        <div class="col-sm-3 form-group mt-auto">
+                            <button type="button" class="btn btn-block btn-danger" onclick="">Delete</button>
                         </div>
                     </div>
                     <div class="row">
