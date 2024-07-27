@@ -79,13 +79,19 @@
             //console.log(limit_amount, limit_offset)
         }
 
+        if (isall_checked) {
+            var check_query = "checked";
+        }else {
+            var check_query = "";
+        }
+
         request_body = {
             'emp_id': employee_id,
             'full_name': employee_name,
             'from_user': with_concern,
             'limit_amount': limit_amount,
             'limit_offset': limit_offset, 
-            'isall_checked': isall_checked,
+            'check_query': check_query,
         };
         //check health
         console.log(request_body);
@@ -94,7 +100,6 @@
         $.ajax({
             url: '../../process/employee_search_filtered_dismiss_get.php',
             type: 'GET',
-            cache: false,
             data: request_body, 
             dataType: 'json',
             success: function (response) {
@@ -144,7 +149,7 @@
     }
 
     function allchecked() {
-        //console.log(this);
+        console.log(this);
         var checkboxes = $(this).closest('table').find(':checkbox');
         checkboxes.prop('checked', $(this).is(':checked'));
     }

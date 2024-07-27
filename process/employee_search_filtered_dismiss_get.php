@@ -5,14 +5,7 @@
     $from_user = $_GET['from_user'];
     $limit_amount = $_GET['limit_amount'];
     $limit_offset = $_GET['limit_offset'];
-    $isall_checked = $_GET['isall_checked'];
-    $checked_inquiry = "";
-    if ($isall_checked = true) {
-        $return_body['ifresult'] = "iftrued";
-        $checked_inquiry = "checked";
-    } else {
-        $return_body['ifresult'] = "iffalsed";
-    }
+    $check_query = $_GET['check_query'];
 
     //prepare query and insert into
     require 'conn.php';
@@ -41,7 +34,7 @@
     foreach($stmt->fetchAll() as $x) {
          $new_table .= '
          <tr style="cursor:pointer;" ' . htmlspecialchars($x["content"]) . '">
-            <td><input type="checkbox" id="'. $x["id"] .  '"></td>
+            <td><input type="checkbox" id="'. $x["id"] .  '" ' . $check_query . '></td>
             <td>' . $x['id_number'] . '</td>
             <td>' . $x['full_name'] . '</td>
             <td>' . $x['from_user'] . '</td>
@@ -58,8 +51,7 @@
     $return_body['success'] = true;
     $return_body['row_count'] = $stmt->rowCount();
     $return_body['new_table'] = !empty($new_table) ? $new_table : "";
-    $return_body['isall_checked'] = $isall_checked;
-    $return_body['checked_inquiry'] = $checked_inquiry;
+    $return_body['check_query'] = $check_query;
     //DO NOT EXPOSE
     $return_body['query'] = $sql;
     echo json_encode($return_body);
