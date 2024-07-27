@@ -41,9 +41,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12 table-responsive" style="height:300px; overflow:auto; display:inline-block;">
+                                    <div class="col-sm-12 table-responsive" onscroll="debounce(viewalertscroll, 250)" id="AlertTableDiv" style="height:300px; overflow:auto; display:inline-block;">
                                         <?php include '../../process/alert_table_get.php';?>
                                     <!--  ending div of col at the include -->
                                 </div>
@@ -51,7 +49,7 @@
                                 <div class="col-sm-12 alert alert-info alert-dismissible" id="LoadMoreAlert" style="display:none;">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                                     <h5><i class="icon fas fa-exclamation-triangle"></i> Maximum Reached!</h5>
-                                    Reached End of Alert
+                                    Now Viewing All Queried Alerts
                                     </div>
                                 </div>
                                 <div class="row mt-1 mb-1">
@@ -70,30 +68,31 @@
 
 <script>
     function employeeSearch(method) {
+        console.log('asdf');
         var employee_id = document.getElementById("EmployeeIDSearchInput").value;
         var employee_name = document.getElementById("EmployeeNameSearchInput").value;
         var with_concern = document.getElementById("WithConcernSearchInput").value;
 
         if (method == "filter_search") {
-            var limit_start = 0;
-            var limit_end = 50;
+            var limit_amount = 50;
+            var limit_offset = 0;
         }else if (method == "load_more") {
             //console.log(document.getElementById("CurrentLoadedPagination"));
+            var limit_amount = 50;
             var current_loaded = parseInt(document.getElementById("CurrentLoadedPagination").innerText);
-            var limit_start = current_loaded;
-            var limit_end = limit_start + 50;
-            //console.log(limit_start, limit_end)
+            var limit_offset = current_loaded;
+            //console.log(limit_amount, limit_offset)
         }
 
         request_body = {
             'emp_id': employee_id,
             'full_name': employee_name,
             'from_user': with_concern,
-            'limit_start': limit_start,
-            'limit_end': limit_end, 
+            'limit_amount': limit_amount,
+            'limit_offset': limit_offset, 
         };
         //check health
-        console.log(request_body);
+        //console.log(request_body);
         //console.log(method);
 
         $.ajax({
@@ -103,17 +102,18 @@
             dataType: 'json',
             success: function (response) {
                 if (response.success) {
-                    console.log(response);
+                    //console.log(response);
                     if (method == "filter_search") {
+                        //console.log("searched method filter");
                         document.getElementById("AlertTableViewBody").innerHTML = response.new_table;
                         //system critical on the debug menu
                         document.getElementById("CurrentLoadedPagination").innerText = response.row_count;
                         document.getElementById("AlertTableViewCount").innerHTML = "Showing " + response.row_count + " results";
                     }else if (method == "load_more") {
                         document.getElementById("AlertTableViewBody").insertAdjacentHTML('beforeend', response.new_table);
-                        document.getElementById("CurrentLoadedPagination").innerHTML = parseInt(document.getElementById("CurrentLoadedPagination").innerText) + response.row_count;
                         document.getElementById("AlertTableViewCount").innerHTML = "Showing " + (parseInt(document.getElementById("CurrentLoadedPagination").innerText) + response.row_count) + " results";
-
+                        //system critical on the debug menu
+                        document.getElementById("CurrentLoadedPagination").innerHTML = parseInt(document.getElementById("CurrentLoadedPagination").innerText) + response.row_count;
                         if (response.row_count == 0) {
                             document.getElementById("LoadMoreButton").style.display = "none";
                             document.getElementById("LoadMoreAlert").style.display = "inline-block";
@@ -144,6 +144,25 @@
         document.getElementById("WithConcern-alert-tvm").value = content[2];
         document.getElementById("ContactPerson-alert-tvm").value = content[3];
         document.getElementById("Content-alert-tvm").value = alert_content;
+    }
+
+    //new method of preventing spam, see the table div for the implementation
+    function debounce(method, delay) {
+        clearTimeout(method._tId);
+        method._tId = setTimeout(function() {
+            method();
+        }, delay);
+    }
+
+    function viewalertscroll() {
+        var scrollTop = document.getElementById("AlertTableDiv").scrollTop;
+        var scrollHeight = document.getElementById("AlertTableDiv").scrollHeight;
+        var offsetHeight = document.getElementById("AlertTableDiv").offsetHeight;
+
+        //check if the scroll reached the bottom
+        if ((offsetHeight + scrollTop + 1) >= scrollHeight) {
+            employeeSearch("load_more");
+        }
     }
 </script>
 

@@ -3,8 +3,8 @@
     $emp_id = $_GET['emp_id'];
     $full_name = $_GET['full_name'];
     $from_user = $_GET['from_user'];
-    $limit_start = $_GET['limit_start'];
-    $limit_end = $_GET['limit_end'];
+    $limit_amount = $_GET['limit_amount'];
+    $limit_offset = $_GET['limit_offset'];
 
     //prepare query and insert into
     require 'conn.php';
@@ -22,7 +22,7 @@
     $sql_middle_partial .= !empty($full_name) ? ' AND user_accounts.full_name LIKE "' . $full_name .'%" ' :  '';
     $sql_middle_partial .= !empty($from_user) && $from_user <> "ALL" ? ' AND user_alerts.from_user ="' . $from_user .'" ' :  '';
 
-    $sql_partial_end = " ORDER BY user_alerts.date_created DESC LIMIT " . $limit_start . ", " . $limit_end;
+    $sql_partial_end = " ORDER BY user_alerts.date_created DESC LIMIT " . $limit_amount . " OFFSET " . $limit_offset;
     //column parsing + filtering + pagination
     $sql = $sql_partial_start . $sql_middle_partial . $sql_partial_end;
 
@@ -47,8 +47,6 @@
      }
 
     $return_body['success'] = true;
-    $return_body['limit_start'] = $limit_start;
-    $return_body['limit_end'] = $limit_end;
     $return_body['row_count'] = $stmt->rowCount();
     $return_body['new_table'] = !empty($new_table) ? $new_table : "";
     //DO NOT EXPOSE

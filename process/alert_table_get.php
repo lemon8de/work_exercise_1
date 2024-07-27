@@ -24,7 +24,7 @@ $stmt->execute();
 if ($stmt->rowCount() > 0) {
     foreach($stmt->fetchAll() as $x) {
         echo '
-        <tr onclick="alert_table_click.call(this)" style="cursor:pointer;" class="modal-trigger" data-toggle="modal" data-target="#alert_table_click_modal" custom-content="" . htmlspecialchars($x["content"]) .  "">
+        <tr onclick="alert_table_click.call(this)" style="cursor:pointer;" class="modal-trigger" data-toggle="modal" data-target="#alert_table_click_modal" custom-content="' . htmlspecialchars($x["content"]) .  '">
             <td>' . $x["id_number"] . '</td>
             <td>' . $x["full_name"] . '</td>
             <td>' . $x["from_user"] . '</td>
@@ -41,7 +41,7 @@ if ($stmt->rowCount() > 0) {
         </tbody>
     </table>
     </div>
-    <div class="form-inline text-muted" id="table-debug">
+    <div class="form-inline text-muted" id="table-debug" style="display:none;">
         <div class="form-group">
             <p>---[Pagination Debug] &nbsp;</p>
         </div>
