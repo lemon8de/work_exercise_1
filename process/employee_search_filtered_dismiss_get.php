@@ -17,7 +17,7 @@
     //prepare query and insert into
     require 'conn.php';
 
-    $sql_partial_start = "SELECT user_alerts.id_number, user_accounts.full_name, user_alerts.from_user, user_alerts.content, withconcern_masterlist.contact_person, user_alerts.date_created, user_alerts.dismissed
+    $sql_partial_start = "SELECT user_alerts.id, user_alerts.id_number, user_accounts.full_name, user_alerts.from_user, user_alerts.content, withconcern_masterlist.contact_person, user_alerts.date_created, user_alerts.dismissed
       	FROM user_alerts
         LEFT JOIN user_accounts
         ON user_alerts.id_number = user_accounts.id_number
@@ -40,8 +40,8 @@
     $new_table = "";
     foreach($stmt->fetchAll() as $x) {
          $new_table .= '
-         <tr onclick="alert_table_click.call(this)" style="cursor:pointer;" class="modal-trigger" data-toggle="modal" data-target="#alert_table_click_modal" custom-content="' . htmlspecialchars($x["content"]) . '">
-            <td><input type="checkbox" ' . $checked_inquiry .  '></td>
+         <tr style="cursor:pointer;" ' . htmlspecialchars($x["content"]) . '">
+            <td><input type="checkbox" id="'. $x["id"] .  '"></td>
             <td>' . $x['id_number'] . '</td>
             <td>' . $x['full_name'] . '</td>
             <td>' . $x['from_user'] . '</td>
