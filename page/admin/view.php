@@ -3,61 +3,56 @@
 
 <div class="content-wrapper">
     <div class="container-fluid m-1">
-        <div class="row">
-                <div class="col-sm-12">
-                    <div class="card card-gray-dark card-outlined">
-                        <div class="card-header">
-                            <h3 class="card-title">Viewing Alerts</h3>
-                            <!-- <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                                <button type="button" class="btn btn-tool" data-card-widget="maximize">
-                                    <i class="fas fa-expand"></i>
-                                </button>
-                            </div> -->
+        <div class="card card-gray-dark card-outline">
+            <div class="card-header">
+                <h3 class="card-title">Viewing Alerts</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" id="SelectEmployeeButton" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="maximize">
+                        <i class="fas fa-expand"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="container">
+                    <div class="row mb-2">
+                        <div class="col-sm-3 form-group">
+                            <label>Employee ID</label>
+                            <input type="text" class="form-control" id="EmployeeIDSearchInput" placeholder="Employee ID">
                         </div>
-                        <div class="card body m-2 card-outlined pl-4 pt-1" style="display:block">
-                            <div class="container">
-                                <div class="row mb-2">
-                                    <div class="col-sm-3 form-group">
-                                        <label>Employee ID</label>
-                                        <input type="text" class="form-control" id="EmployeeIDSearchInput" placeholder="Employee ID">
-                                    </div>
-                                    <div class="col-sm-3 form-group">
-                                        <label>Employee Name</label>
-                                        <input type="text" class="form-control" id="EmployeeNameSearchInput" placeholder="Employee Name">
-                                    </div>
-                                    <div class="col-sm-3 form-group">
-                                        <label>With Concern</label>
-                                        <select class="form-control" id="WithConcernSearchInput">
-                                            <option value="" selected disabled>Select</option>
-                                            <option value="ALL">All Departments</option>
-                                            <?php include '../../process/with_concern_get.php';?>
-                                        </select>
-                                    </div>
-                                    <div class="col-sm-3 mt-auto form-group">
-                                        <button type="button" class="btn btn-block btn-primary" onclick="employeeSearch('filter_search')">Search</button>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12 table-responsive" onscroll="debounce(viewalertscroll, 250)" id="AlertTableDiv" style="height:300px; overflow:auto; display:inline-block;">
-                                        <?php include '../../process/alert_table_get.php';?>
-                                    <!--  ending div of col at the include -->
-                                </div>
-                                <div class="row">
-                                <div class="col-sm-12 alert alert-info alert-dismissible" id="LoadMoreAlert" style="display:none;">
-                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                    <h5><i class="icon fas fa-exclamation-triangle"></i> Maximum Reached!</h5>
-                                    Now Viewing All Queried Alerts
-                                    </div>
-                                </div>
-                                <div class="row mt-1 mb-1">
-                                    <div class="col-sm-2 mx-auto">
-                                        <button type="button" class="btn btn-block btn-secondary" id="LoadMoreButton" onclick="employeeSearch('load_more')">Load More</button>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="col-sm-3 form-group">
+                            <label>Employee Name</label>
+                            <input type="text" class="form-control" id="EmployeeNameSearchInput" placeholder="Employee Name">
+                        </div>
+                        <div class="col-sm-3 form-group">
+                            <label>With Concern</label>
+                            <select class="form-control" id="WithConcernSearchInput">
+                                <option value="" selected disabled>Select</option>
+                                <option value="ALL">All Departments</option>
+                                <?php include '../../process/with_concern_get.php';?>
+                            </select>
+                        </div>
+                        <div class="col-sm-3 mt-auto form-group">
+                            <button type="button" class="btn btn-block btn-primary" onclick="employeeSearch('filter_search')">Search</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 table-responsive" onscroll="debounce(viewalertscroll, 250)" id="AlertTableDiv" style="height:300px; overflow:auto; display:inline-block;">
+                            <?php include '../../process/alert_table_get.php';?>
+                        <!--  ending div of col at the include -->
+                    </div>
+                    <div class="row">
+                    <div class="col-sm-12 alert alert-info alert-dismissible" id="LoadMoreAlert" style="display:none;">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h5><i class="icon fas fa-exclamation-triangle"></i> Maximum Reached!</h5>
+                        Now Viewing All Queried Alerts
+                        </div>
+                    </div>
+                    <div class="row mt-1 mb-1">
+                        <div class="col-sm-2 mx-auto">
+                            <button type="button" class="btn btn-block btn-secondary" id="LoadMoreButton" onclick="employeeSearch('load_more')">Load More</button>
                         </div>
                     </div>
                 </div>
@@ -68,7 +63,6 @@
 
 <script>
     function employeeSearch(method) {
-        console.log('asdf');
         var employee_id = document.getElementById("EmployeeIDSearchInput").value;
         var employee_name = document.getElementById("EmployeeNameSearchInput").value;
         var with_concern = document.getElementById("WithConcernSearchInput").value;
