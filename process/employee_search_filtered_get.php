@@ -29,7 +29,7 @@
     $stmt = $conn->prepare($sql);
     $stmt->execute();
     if ($stmt->rowCount() > 0) {
-    $new_table = " ";
+    $new_table = "";
     foreach($stmt->fetchAll() as $x) {
          $new_table .= '
          <tr onclick="alert_table_click.call(this)" style="cursor:pointer;" class="modal-trigger" data-toggle="modal" data-target="#alert_table_click_modal" custom-content="' . htmlspecialchars($x["content"]) . '">
@@ -47,9 +47,11 @@
      }
 
     $return_body['success'] = true;
+    $return_body['limit_start'] = $limit_start;
+    $return_body['limit_end'] = $limit_end;
     $return_body['row_count'] = $stmt->rowCount();
-    $return_body['new_table'] = $new_table;
+    $return_body['new_table'] = !empty($new_table) ? $new_table : "";
     //DO NOT EXPOSE
-    //$return_body['query'] = $sql;
+    $return_body['query'] = $sql;
     echo json_encode($return_body);
 ?>

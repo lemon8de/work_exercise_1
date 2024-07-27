@@ -47,9 +47,16 @@
                                         <?php include '../../process/alert_table_get.php';?>
                                     <!--  ending div of col at the include -->
                                 </div>
+                                <div class="row">
+                                <div class="col-sm-12 alert alert-info alert-dismissible" id="LoadMoreAlert" style="display:none;">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <h5><i class="icon fas fa-exclamation-triangle"></i> Maximum Reached!</h5>
+                                    Reached End of Alert
+                                    </div>
+                                </div>
                                 <div class="row mt-1 mb-1">
                                     <div class="col-sm-2 mx-auto">
-                                        <button type="button" class="btn btn-block btn-secondary" onclick="employeeSearch('load_more')">Load More</button>
+                                        <button type="button" class="btn btn-block btn-secondary" id="LoadMoreButton" onclick="employeeSearch('load_more')">Load More</button>
                                     </div>
                                 </div>
                             </div>
@@ -68,12 +75,14 @@
         var with_concern = document.getElementById("WithConcernSearchInput").value;
 
         if (method == "filter_search") {
-            limit_start = 0;
-            limit_end = 50;
+            var limit_start = 0;
+            var limit_end = 50;
         }else if (method == "load_more") {
-            var current_loaded = document.getElementById("CurrentLoadedPagination").value;
-            limit_start = current_loaded - 1;
-            limit_end = limit_start + 50;
+            //console.log(document.getElementById("CurrentLoadedPagination"));
+            var current_loaded = parseInt(document.getElementById("CurrentLoadedPagination").innerText);
+            var limit_start = current_loaded;
+            var limit_end = limit_start + 50;
+            //console.log(limit_start, limit_end)
         }
 
         request_body = {
@@ -85,6 +94,7 @@
         };
         //check health
         console.log(request_body);
+        //console.log(method);
 
         $.ajax({
             url: '../../process/employee_search_filtered_get.php',
@@ -93,13 +103,21 @@
             dataType: 'json',
             success: function (response) {
                 if (response.success) {
+                    console.log(response);
                     if (method == "filter_search") {
                         document.getElementById("AlertTableViewBody").innerHTML = response.new_table;
                         //system critical on the debug menu
-                        document.getElementById("CurrentLoadedPagination").innerHTML = response.row_count;
+                        document.getElementById("CurrentLoadedPagination").innerText = response.row_count;
                         document.getElementById("AlertTableViewCount").innerHTML = "Showing " + response.row_count + " results";
                     }else if (method == "load_more") {
-                        ;
+                        document.getElementById("AlertTableViewBody").insertAdjacentHTML('beforeend', response.new_table);
+                        document.getElementById("CurrentLoadedPagination").innerHTML = parseInt(document.getElementById("CurrentLoadedPagination").innerText) + response.row_count;
+                        document.getElementById("AlertTableViewCount").innerHTML = "Showing " + (parseInt(document.getElementById("CurrentLoadedPagination").innerText) + response.row_count) + " results";
+
+                        if (response.row_count == 0) {
+                            document.getElementById("LoadMoreButton").style.display = "none";
+                            document.getElementById("LoadMoreAlert").style.display = "inline-block";
+                        }
                     }
                 } else {
                     //handle errors
@@ -109,7 +127,7 @@
         });
     }
     function alert_table_click() {
-        console.log(this);
+        //console.log(this);
         content = [];
         alert_content = this.getAttribute('custom-content');
         var contentItems = this.querySelectorAll("td")
@@ -117,8 +135,8 @@
             content.push(contentItems[i].innerText);
         }
         //checkhealth
-        console.log(content);
-        console.log(alert_content);
+        //console.log(content);
+        //console.log(alert_content);
 
         //apply to modal
         document.getElementById("DateAlertTableViewModal").innerText = content[4];
