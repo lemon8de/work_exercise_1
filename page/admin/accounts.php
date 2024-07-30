@@ -4,7 +4,6 @@
 <div class="content-wrapper">
     <div class="container-fluid m-1">
 
-
     <div class="card card-gray-dark card-outline">
             <div class="card-header">
                 <h3 class="card-title">Account Management Controls</h3>
@@ -20,18 +19,25 @@
             <div class="card-body">
                 <div class="container">
                     <div class="row mb-2">
-                        <div class="col-4">
+                        <div class="col-3">
                             <a href="#" class="btn btn-success btn-block" style="height:100%;" data-toggle="modal" data-target="#new_account"><i class="fas fa-plus-circle mr-2"></i>Register Account</a>
                         </div>
-                        <div class="col-4">
+                        <div class="col-3">
                             <a href="#" class="btn btn-info btn-block" style="height:100%;" onclick="export_csv('accounts_table')"><i class="fas fa-download mr-2"></i>Export Account 2</a>
                         </div>
-                        <div class="col-4">
+                        <div class="col-3">
                             <button class="btn btn-warning btn-block btn-file" onclick="fileexplorer()">
                             <form id="file_form" enctype="multipart/form-data">
                                 <span><i class="fas fa-upload mr-2"></i> Import Account 2 </span><input type="file" id="file2" name="file" onchange="upload_csv()" accept=".csv" style="opacity:0; display:none;">
                             </form>
                             </button>
+                        </div>
+                        <div class="col-3">
+                            <a href="../../process/download_template.php">
+                                <button class="btn btn-secondary btn-block btn-file">
+                                    <span><i class="fas fa-download mr-2"></i> Download Template </span>
+                                </button>
+                            </a>
                         </div>
                         <!-- body -->
                     </div>
@@ -94,6 +100,7 @@
     function fileexplorer() {
         document.getElementById("file2").click();
     }
+
     function employeeSearch(method) {
         var employee_id = document.getElementById("EmployeeIDSearchInput").value;
         var employee_name = document.getElementById("EmployeeNameSearchInput").value;
@@ -158,3 +165,31 @@
 </script>
 
 <?php include '../../footer.php';?>
+
+<script>
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        customClass: {
+            popup: 'colored-toast',
+        },
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+    })
+</script>
+<?php
+//alerting after an api redirect
+    if (isset($_SESSION['account_creation_username'])) {
+        echo "
+        <script>
+        Toast.fire({
+            icon: 'success',
+            title: 'Account created with username " . $_SESSION['account_creation_username']  . " with id:  " . $_SESSION['account_creation_id'] . "',
+        })
+        </script>
+        ";
+        $_SESSION['account_creation_username'] = null;
+        $_SESSION['account_creation_id'] = null;
+    }
+?>

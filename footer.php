@@ -11,6 +11,7 @@
 include '../../modals/logout_modal.php';
 include '../../modals/confirm_alert_post_modal.php';
 include '../../modals/alert_table_click_modal.php';
+include '../../modals/new_account.php';
 ?>
 <!-- scripts from the web template -->
 <!-- jQuery -->
