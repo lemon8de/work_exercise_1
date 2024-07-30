@@ -23,7 +23,9 @@
     $conn = null;
 
     $inner_html = "";
+    $table_empty = true;
     if ($stmt->rowCount() > 1) {
+        $table_empty = false;
         foreach($stmt->fetchAll() as $x) {
             $inner_html .= '
             <tr style="cursor:pointer;">
@@ -42,5 +44,6 @@
     $return_body['new_table'] = $inner_html;
     $return_body['id'] = $id;
     $return_body['success'] = true;
+    $return_body['table_empty'] = $table_empty;
     echo json_encode($return_body);
 ?>

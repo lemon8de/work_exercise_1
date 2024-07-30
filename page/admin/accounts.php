@@ -60,16 +60,23 @@
             </div>
             <div class="card-body">
                 <div class="container" id="TableDiv">
+                    <div class="row mb-4">
+                        <div class="col-sm-12" id="gobackdiv" style="display:none;">
+                            <button type="button" class="btn btn-tool" onclick="tableswitchingbutton()">
+                                <i class="fas fa-arrow-left"></i> <strong>Go Back</strong>
+                            </button>
+                        </div>
+                    </div>
                     <div class="row" id="Table1Div">
                         <div class="col-sm-12 table-responsive" id="UserTableDiv" style="height:300px; overflow:auto; display:inline-block;">
                             <?php include '../../process/user_table_get.php';?>
                         <!--  ending div of col at the include -->
                     </div>
-                        <div class="row" id="Table2Div">
-                            <div class="col-sm-12 table-responsive" id="UserTableAlertDiv" style="height:300px; overflow:auto; display:inline-block;">
-                                <?php include '../../process/user_table_tableswitch_get.php';?>
-                            <!--  ending div of col at the include -->
-                        </div>
+                    <div class="row" id="Table2Div" style="display:none;">
+                        <div class="col-sm-12 table-responsive" id="UserTableAlertDiv" style="height:300px; overflow:auto; display:inline-block;">
+                            <?php include '../../process/user_table_tableswitch_get.php';?>
+                        <!--  ending div of col at the include -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -80,13 +87,19 @@
     function fileexplorer() {
         document.getElementById("file2").click();
     }
+
+    function tableswitchingbutton() {
+        document.getElementById("Table1Div").style.display = "block";
+        document.getElementById("Table2Div").style.display = "none";
+        document.getElementById("gobackdiv").style.display = "none";
+    }
+
     function usertable_click() {
         var id = this.getAttribute('id');
 
         //checkhealth
-        //console.log(id);
+        console.log(id);
 
-        //api here
         $.ajax({
             url: '../../process/generate_tableswitch_content.php',
             type: 'GET',
@@ -96,13 +109,66 @@
             dataType: 'json',
             success: function (response) {
                 if (response.success) {
-                    document.getElementById('UserTableViewBody2').innerHTML = response.new_table;
+                    document.getElementById("UserTableViewBody2").innerHTML = response.new_table;
+                    if (response.table_empty) {
+                        Toast.fire({
+                            icon: 'info',
+                            title: 'User does not have any pending alerts',
+                        })
+                    } else {
+                        document.getElementById("Table1Div").style.display = "none";
+                        document.getElementById("Table2Div").style.display = "block";
+                        document.getElementById("gobackdiv").style.display = "block";
+                    }
                 } else {
                     //handle errors
                     //console.log("error");
                 }
             }
         });
+
     }
+
 </script>
+
 <?php include '../../footer.php';?>
+
+<script>
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        customClass: {
+            popup: 'colored-toast',
+        },
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+    })
+</script>
+<?php
+//alerting after an api redirect
+    if (isset($_SESSION['account_creation_username'])) {
+        echo "
+        <script>
+        Toast.fire({
+            icon: 'success',
+            title: 'Account created with username " . $_SESSION['account_creation_username']  . " with id:  " . $_SESSION['account_creation_id'] . "',
+        })
+        </script>
+        ";
+        $_SESSION['account_creation_username'] = null;
+        $_SESSION['account_creation_id'] = null;
+    }
+    if (isset($_SESSION['import_account_success_created'])) {
+        echo "
+        <script>
+        Toast.fire({
+            icon: 'success',
+            title: 'Import successful. Created " . $_SESSION['import_account_success_created'] . " , Updated " . $_SESSION['import_account_success_updated'] . "',
+        })
+        </script>
+        ";
+        $_SESSION['import_account_success_created'] = null;
+        $_SESSION['import_account_success_updated'] = null;
+    }
+?>
