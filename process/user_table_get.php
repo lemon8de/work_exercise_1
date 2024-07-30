@@ -37,15 +37,5 @@ if ($stmt->rowCount() > 0) {
         </tbody>
     </table>
     </div>
-    <div class="form-inline text-muted" id="table-debug" style="">
-        <div class="form-group">
-            <p>---[Pagination Debug] &nbsp;</p>
-        </div>
-        <div class="form-group">
-            <p>CurrentLoadedPagination=</p>
-            <p id="CurrentLoadedPagination">' . $stmt->rowCount() . '</p><p>---&nbsp;</p>
-        </div>
-    </div>
-    <p class="text-muted" id="AlertTableViewCount">Showing ' . $stmt->rowCount() .  ' results</p>
     ';
 ?>

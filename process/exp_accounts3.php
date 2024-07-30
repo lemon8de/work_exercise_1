@@ -1,8 +1,10 @@
 <?php
 require 'conn.php';
+session_name('exercise_1');
+session_start();
 
-$employee_no = $_GET['employee_no'];
-$full_name = $_GET['full_name'];
+//$employee_no = $_GET['employee_no'];
+//$full_name = $_GET['full_name'];
 $c = 0;
 
 $delimiter = ","; 
@@ -19,7 +21,7 @@ fputs($f, "\xEF\xBB\xBF");
 $fields = array('#', 'ID Number', 'Full Name', 'Username', 'Password', 'Section', 'Position', 'Role'); 
 fputcsv($f, $fields, $delimiter); 
 
-$sql = "SELECT `id_number`, `full_name`, `username`, `password`, `section`, `position`, `role` FROM user_accounts WHERE id_number LIKE '$employee_no%' AND full_name LIKE '$full_name%'";
+$sql = "SELECT `id_number`, `full_name`, `username`, `password`, `section`, `position`, `role` FROM user_accounts";
 $stmt = $conn -> prepare($sql);
 $stmt -> execute();
 $conn = null;
@@ -32,7 +34,6 @@ if ($stmt -> rowCount() > 0) {
     }
     
 }
-
 // Move back to beginning of file 
 fseek($f, 0); 
 // Set headers to download file rather than displayed 

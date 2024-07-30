@@ -23,12 +23,12 @@
                             <a href="#" class="btn btn-success btn-block" style="height:100%;" data-toggle="modal" data-target="#new_account"><i class="fas fa-plus-circle mr-2"></i>Register Account</a>
                         </div>
                         <div class="col-3">
-                            <a href="#" class="btn btn-info btn-block" style="height:100%;" onclick="export_csv('accounts_table')"><i class="fas fa-download mr-2"></i>Export Account 2</a>
+                            <a href="../../process/exp_accounts3.php" class="btn btn-info btn-block" style="height:100%;"><i class="fas fa-download mr-2"></i>Export Account 2</a>
                         </div>
                         <div class="col-3">
                             <button class="btn btn-warning btn-block btn-file" onclick="fileexplorer()">
-                            <form id="file_form" enctype="multipart/form-data">
-                                <span><i class="fas fa-upload mr-2"></i> Import Account 2 </span><input type="file" id="file2" name="file" onchange="upload_csv()" accept=".csv" style="opacity:0; display:none;">
+                            <form id="file_form" enctype="multipart/form-data" action="../../process/imp_accounts2.php" method="POST">
+                                <span><i class="fas fa-upload mr-2"></i> Import Account 2 </span><input type="file" id="file2" name="file" onchange="submit()" accept=".csv" style="opacity:0; display:none;">
                             </form>
                             </button>
                         </div>
@@ -60,35 +60,10 @@
             </div>
             <div class="card-body">
                 <div class="container">
-                    <div class="row mb-2">
-                        <div class="col-sm-4 form-group">
-                            <label>Employee ID</label>
-                            <input type="text" class="form-control" id="EmployeeIDSearchInput" placeholder="Employee ID">
-                        </div>
-                        <div class="col-sm-4 form-group">
-                            <label>Employee Name</label>
-                            <input type="text" class="form-control" id="EmployeeNameSearchInput" placeholder="Employee Name">
-                        </div>
-                        <div class="col-sm-4 mt-auto form-group">
-                            <button type="button" class="btn btn-block btn-primary" onclick="employeeSearch('filter_search')">Search</button>
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col-sm-12 table-responsive" onscroll="debounce(viewalertscroll, 250)" id="UserTableDiv" style="height:300px; overflow:auto; display:inline-block;">
                             <?php include '../../process/user_table_get.php';?>
                         <!--  ending div of col at the include -->
-                    </div>
-                    <div class="row">
-                    <div class="col-sm-12 alert alert-info alert-dismissible" id="LoadMoreAlert" style="display:none;">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h5><i class="icon fas fa-exclamation-triangle"></i> Maximum Reached!</h5>
-                        Now Viewing All Queried Alerts
-                        </div>
-                    </div>
-                    <div class="row mt-1 mb-1">
-                        <div class="col-sm-2 mx-auto">
-                            <button type="button" class="btn btn-block btn-secondary" id="LoadMoreButton" onclick="employeeSearch('load_more')">Load More</button>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -191,5 +166,17 @@
         ";
         $_SESSION['account_creation_username'] = null;
         $_SESSION['account_creation_id'] = null;
+    }
+    if (isset($_SESSION['import_account_success_created'])) {
+        echo "
+        <script>
+        Toast.fire({
+            icon: 'success',
+            title: 'Import successful. Created " . $_SESSION['import_account_success_created'] . " , Updated " . $_SESSION['import_account_success_updated'] . "',
+        })
+        </script>
+        ";
+        $_SESSION['import_account_success_created'] = null;
+        $_SESSION['import_account_success_updated'] = null;
     }
 ?>
