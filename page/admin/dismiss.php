@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="row mb-2">
-                        <div class="col-sm-3 form-group">
+                        <!-- <div class="col-sm-3 form-group">
                             <label>Start Date</label>
                             <input type="date" class="form-control" id="StartDateSearchInput">
                         </div>
@@ -48,9 +48,9 @@
                             <input type="date" class="form-control" id="EndDateSearchInput">
                         </div>
                         <div class="col-sm-3 form-group">
-                        </div>
+                        </div> -->
                         <div class="col-sm-3 form-group mt-auto">
-                            <button type="button" class="btn btn-block btn-danger" onclick="">Delete</button>
+                            <button type="button" class="btn btn-block btn-danger" onclick="alertdelete()">Delete</button>
                         </div>
                     </div>
                     <div class="row">
@@ -77,6 +77,41 @@
 </div>
 
 <script>
+    var checked_list = [];
+    function alertdelete() {
+
+        if (checked_list.length == 0) {
+            alert("nothing selected");
+            return 0
+        }
+        request_body = {
+            'to_delete' : checked_list,
+        };
+
+        $.ajax({
+            url: '../../process/delete_alerts_api.php',
+            type: 'POST',
+            data: request_body, 
+            dataType: 'json',
+            success: function (response) {
+                if (response.success) {
+                    //console.log(response);
+                    employeeSearch('filter_search');
+                }
+            }
+        });
+    }
+    function checkboxfunction() {
+        //console.log(this.id);
+        var is_checked = $(this).is(":checked");
+
+        if (is_checked) {
+            checked_list.push(this.id);
+        } else {
+            checked_list.splice(checked_list.indexOf(this.id), 1);
+        }
+        //console.log(checked_list);
+    }
     function employeeSearch(method) {
         var employee_id = document.getElementById("EmployeeIDSearchInput").value;
         var employee_name = document.getElementById("EmployeeNameSearchInput").value;
@@ -84,20 +119,29 @@
         var isall_checked = $("#SelectAllCheckBox").is(":checked");
 
         if (method == "filter_search") {
+            checked_list.length = 0;
+            //have to clear all checkboxes
+            var checkboxes = $("#AlertTableDiv").closest('table').find(':checkbox');
+            //remove the check on the select all, the search api actually posts unchecked rows so no need to reset those aswell
+            $("#SelectAllCheckBox").prop("checked", false);
+
             var limit_amount = 50;
             var limit_offset = 0;
+
+            //prevent checked boxes when you click search
+            var check_query = "";
         }else if (method == "load_more") {
             //console.log(document.getElementById("CurrentLoadedPagination"));
             var limit_amount = 50;
             var current_loaded = parseInt(document.getElementById("CurrentLoadedPagination").innerText);
             var limit_offset = current_loaded;
             //console.log(limit_amount, limit_offset)
-        }
 
-        if (isall_checked) {
-            var check_query = "checked";
-        }else {
-            var check_query = "";
+            if (isall_checked) {
+                var check_query = "checked";
+            } else {
+                var check_query = "";
+            }
         }
 
         request_body = {
@@ -109,7 +153,7 @@
             'check_query': check_query,
         };
         //check health
-        console.log(request_body);
+        //console.log(request_body);
         //console.log(method);
 
         $.ajax({
@@ -126,11 +170,16 @@
                         //system critical on the debug menu
                         document.getElementById("CurrentLoadedPagination").innerText = response.row_count;
                         document.getElementById("AlertTableViewCount").innerHTML = "Showing " + response.row_count + " results";
+
                     }else if (method == "load_more") {
                         document.getElementById("AlertTableViewBody").insertAdjacentHTML('beforeend', response.new_table);
                         document.getElementById("AlertTableViewCount").innerHTML = "Showing " + (parseInt(document.getElementById("CurrentLoadedPagination").innerText) + response.row_count) + " results";
                         //system critical on the debug menu
                         document.getElementById("CurrentLoadedPagination").innerHTML = parseInt(document.getElementById("CurrentLoadedPagination").innerText) + response.row_count;
+
+                        //console.log(response.emp_id);
+                        response.emp_id.forEach((element) => $("#" + element).trigger('change'));
+
                         if (response.row_count == 0) {
                             document.getElementById("LoadMoreButton").style.display = "none";
                             document.getElementById("LoadMoreAlert").style.display = "inline-block";
@@ -164,9 +213,10 @@
     }
 
     function allchecked() {
-        console.log(this);
+        checked_list.length = 0;
         var checkboxes = $(this).closest('table').find(':checkbox');
         checkboxes.prop('checked', $(this).is(':checked'));
+        checkboxes.trigger('change');
     }
 </script>
 

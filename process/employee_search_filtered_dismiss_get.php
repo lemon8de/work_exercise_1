@@ -29,12 +29,15 @@
 
     $stmt = $conn->prepare($sql);
     $stmt->execute();
+
+    $employee_list = [];
+
     if ($stmt->rowCount() > 0) {
     $new_table = "";
     foreach($stmt->fetchAll() as $x) {
          $new_table .= '
          <tr style="cursor:pointer;" ' . htmlspecialchars($x["content"]) . '">
-            <td><input type="checkbox" id="'. $x["id"] .  '" ' . $check_query . '></td>
+            <td><input type="checkbox" id="'. $x["id"] .  '" ' . $check_query . ' onchange="checkboxfunction.call(this)"></td>
             <td>' . $x['id_number'] . '</td>
             <td>' . $x['full_name'] . '</td>
             <td>' . $x['from_user'] . '</td>
@@ -42,6 +45,7 @@
             <td>' . $x['date_created'] . '</td>
          </tr>
          ';
+         array_push($employee_list,$x['id']);
      }
 
      }else{
@@ -52,7 +56,7 @@
     $return_body['row_count'] = $stmt->rowCount();
     $return_body['new_table'] = !empty($new_table) ? $new_table : "";
     $return_body['check_query'] = $check_query;
-    //DO NOT EXPOSE
+    $return_body['emp_id'] = $employee_list;
     $return_body['query'] = $sql;
     echo json_encode($return_body);
 ?>

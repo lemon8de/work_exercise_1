@@ -26,7 +26,7 @@ if ($stmt->rowCount() > 0) {
     foreach($stmt->fetchAll() as $x) {
         echo '
         <tr style="cursor:pointer;" custom-content="' . htmlspecialchars($x["content"]) .  '">
-            <td><input type="checkbox" id="'. $x["id"] .  '"></td>
+            <td><input type="checkbox" id="'. $x["id"] .  '" onchange="checkboxfunction.call(this)"></td>
             <td>' . $x["id_number"] . '</td>
             <td>' . $x["full_name"] . '</td>
             <td>' . $x["from_user"] . '</td>
