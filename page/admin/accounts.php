@@ -59,12 +59,17 @@
                 </div>
             </div>
             <div class="card-body">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-12 table-responsive" onscroll="debounce(viewalertscroll, 250)" id="UserTableDiv" style="height:300px; overflow:auto; display:inline-block;">
+                <div class="container" id="TableDiv">
+                    <div class="row" id="Table1Div">
+                        <div class="col-sm-12 table-responsive" id="UserTableDiv" style="height:300px; overflow:auto; display:inline-block;">
                             <?php include '../../process/user_table_get.php';?>
                         <!--  ending div of col at the include -->
                     </div>
+                        <div class="row" id="Table2Div">
+                            <div class="col-sm-12 table-responsive" id="UserTableAlertDiv" style="height:300px; overflow:auto; display:inline-block;">
+                                <?php include '../../process/user_table_tableswitch_get.php';?>
+                            <!--  ending div of col at the include -->
+                        </div>
                 </div>
             </div>
         </div>
@@ -75,108 +80,29 @@
     function fileexplorer() {
         document.getElementById("file2").click();
     }
-
-    function employeeSearch(method) {
-        var employee_id = document.getElementById("EmployeeIDSearchInput").value;
-        var employee_name = document.getElementById("EmployeeNameSearchInput").value;
-
-        if (method == "filter_search") {
-            var limit_amount = 50;
-            var limit_offset = 0;
-        }else if (method == "load_more") {
-            //console.log(document.getElementById("CurrentLoadedPagination"));
-            var limit_amount = 50;
-            var current_loaded = parseInt(document.getElementById("CurrentLoadedPagination").innerText);
-            var limit_offset = current_loaded;
-            //console.log(limit_amount, limit_offset)
-        }
-
-        request_body = {
-            'emp_id': employee_id,
-            'full_name': employee_name,
-            'limit_amount': limit_amount,
-            'limit_offset': limit_offset, 
-        };
-        //check health
-        console.log(request_body);
-        console.log(method);
-
-        $.ajax({
-            url: '../../process/employee_search_filtered_get.php',
-            type: 'GET',
-            data: request_body, 
-            dataType: 'json',
-            success: function (response) {
-                console.log("success");
-            } 
-        });
-    }
     function usertable_click() {
         var id = this.getAttribute('id');
 
         //checkhealth
-        console.log(id);
+        //console.log(id);
 
-    }
-
-    //new method of preventing spam, see the table div for the implementation
-    function debounce(method, delay) {
-        clearTimeout(method._tId);
-        method._tId = setTimeout(function() {
-            method();
-        }, delay);
-    }
-
-    function viewalertscroll() {
-        var scrollTop = document.getElementById("UserTableDiv").scrollTop;
-        var scrollHeight = document.getElementById("UserTableDiv").scrollHeight;
-        var offsetHeight = document.getElementById("UserTableDiv").offsetHeight;
-
-        //check if the scroll reached the bottom
-        if ((offsetHeight + scrollTop + 1) >= scrollHeight) {
-            employeeSearch("load_more");
-        }
+        //api here
+        $.ajax({
+            url: '../../process/generate_tableswitch_content.php',
+            type: 'GET',
+            data: {
+                'id' : id,
+            },
+            dataType: 'json',
+            success: function (response) {
+                if (response.success) {
+                    document.getElementById('UserTableViewBody2').innerHTML = response.new_table;
+                } else {
+                    //handle errors
+                    //console.log("error");
+                }
+            }
+        });
     }
 </script>
-
 <?php include '../../footer.php';?>
-
-<script>
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        customClass: {
-            popup: 'colored-toast',
-        },
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-    })
-</script>
-<?php
-//alerting after an api redirect
-    if (isset($_SESSION['account_creation_username'])) {
-        echo "
-        <script>
-        Toast.fire({
-            icon: 'success',
-            title: 'Account created with username " . $_SESSION['account_creation_username']  . " with id:  " . $_SESSION['account_creation_id'] . "',
-        })
-        </script>
-        ";
-        $_SESSION['account_creation_username'] = null;
-        $_SESSION['account_creation_id'] = null;
-    }
-    if (isset($_SESSION['import_account_success_created'])) {
-        echo "
-        <script>
-        Toast.fire({
-            icon: 'success',
-            title: 'Import successful. Created " . $_SESSION['import_account_success_created'] . " , Updated " . $_SESSION['import_account_success_updated'] . "',
-        })
-        </script>
-        ";
-        $_SESSION['import_account_success_created'] = null;
-        $_SESSION['import_account_success_updated'] = null;
-    }
-?>
