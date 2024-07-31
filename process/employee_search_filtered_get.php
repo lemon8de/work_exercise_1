@@ -1,13 +1,22 @@
 <?php 
+    //prepare query and insert into
+    require 'conn.php';
+
     //get post api data
     $emp_id = $_GET['emp_id'];
     $full_name = $_GET['full_name'];
     $from_user = $_GET['from_user'];
+    //check what the from_user should be, again this is the part where the modal fucked up
+    $sql = "SELECT from_user FROM withconcern_masterlist WHERE contact_person = '$from_user'";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    foreach($stmt->fetchAll() as $x) {
+        $from_user = $x['from_user'];
+    }
     $limit_amount = $_GET['limit_amount'];
     $limit_offset = $_GET['limit_offset'];
 
-    //prepare query and insert into
-    require 'conn.php';
+
 
     $sql_partial_start = "SELECT user_alerts.id_number, user_accounts.full_name, user_alerts.from_user, user_alerts.content, withconcern_masterlist.contact_person, user_alerts.date_created, user_alerts.dismissed
       	FROM user_alerts

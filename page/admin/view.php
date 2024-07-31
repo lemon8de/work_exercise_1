@@ -121,7 +121,7 @@
         });
     }
     function alert_table_click() {
-        //console.log(this);
+        console.log(this);
         content = [];
         alert_content = this.getAttribute('custom-content');
         var contentItems = this.querySelectorAll("td")
@@ -134,8 +134,9 @@
 
         //apply to modal
         document.getElementById("DateAlertTableViewModal").innerText = content[4];
+        document.getElementById("IdAlertTableViewModal").value = this.id;
         document.getElementById("EmployeeID-alert-tvm").value = content[0];
-        document.getElementById("WithConcern-alert-tvm").value = content[2];
+        document.getElementById("WithConcern-alert-tvm").value = content[3];
         document.getElementById("ContactPerson-alert-tvm").value = content[3];
         document.getElementById("Content-alert-tvm").value = alert_content;
     }
@@ -161,3 +162,31 @@
 </script>
 
 <?php include '../../footer.php';?>
+
+
+<script>
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        customClass: {
+            popup: 'colored-toast',
+        },
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+    })
+</script>
+<?php
+//alerting after an api redirect
+    if (isset($_SESSION['alert_update_success'])) {
+        echo "
+        <script>
+        Toast.fire({
+            icon: 'success',
+            title: '" . $_SESSION['alert_update_success'] . "',
+        })
+        </script>
+        ";
+        $_SESSION['alert_update_success'] = null;
+    }
+?>

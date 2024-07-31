@@ -5,9 +5,9 @@ $stmt->execute();
 
 if ($stmt->rowCount() > 0) {
     foreach($stmt->fetchAll() as $x) {
-        echo "
-            <option value= " . $x['from_user'] .  ">" . $x['from_user'] . "</option>
-        ";
+        echo '
+            <option value= "' . $x['contact_person'] .  '">' . $x['from_user'] . '</option>
+        ';
     }
     }else{
         ;
