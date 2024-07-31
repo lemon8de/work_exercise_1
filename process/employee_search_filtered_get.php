@@ -59,6 +59,6 @@
     $return_body['row_count'] = $stmt->rowCount();
     $return_body['new_table'] = !empty($new_table) ? $new_table : "";
     //DO NOT EXPOSE
-    $return_body['query'] = $sql;
+    //$return_body['query'] = $sql;
     echo json_encode($return_body);
 ?>
