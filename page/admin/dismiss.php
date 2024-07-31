@@ -77,6 +77,7 @@
 </div>
 
 <script>
+    
     var checked_list = [];
     function alertdelete() {
 
@@ -97,6 +98,10 @@
                 if (response.success) {
                     //console.log(response);
                     employeeSearch('filter_search');
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Deletion successful',
+                    })
                 }
             }
         });
@@ -221,3 +226,15 @@
 </script>
 
 <?php include '../../footer.php';?>
+<script>
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        customClass: {
+            popup: 'colored-toast',
+        },
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+    })
+</script>

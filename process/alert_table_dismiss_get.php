@@ -22,8 +22,23 @@ $sql = "SELECT user_alerts.id, user_alerts.id_number, user_accounts.full_name, u
         ORDER BY user_alerts.date_created DESC LIMIT 50";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
+
+//checking if the user has pending alerts RETARD wrong file!!!!!
+// $sql_check = 'SELECT id FROM user_alerts WHERE id_number = ?';
+// $stmt_check = $conn->prepare($sql_check);
+
 if ($stmt->rowCount() > 0) {
     foreach($stmt->fetchAll() as $x) {
+
+        //WRONG FILE RETARD
+        // $params = array($x['id_number'],);
+        // $stmt_check->execute($params);
+        // if ($stmt_check->rowCount() > 0) {
+        //     $colorized = " background-color: #dc3545;";
+        // } else {
+        //     $colorized = "";
+        // }
+
         echo '
         <tr style="cursor:pointer;" custom-content="' . htmlspecialchars($x["content"]) .  '">
             <td><input type="checkbox" id="'. $x["id"] .  '" onchange="checkboxfunction.call(this)"></td>

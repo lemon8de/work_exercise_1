@@ -61,9 +61,9 @@ if (!empty($_FILES['file']['name']) && in_array($_FILES['file']['type'],$csvMime
                         $error++;
                     }
                 }
-                $conn = null;
             }
         }
+        $conn = null;
 
         $_SESSION['import_account_success_created'] = strval($created);
         $_SESSION['import_account_success_updated'] = strval($updated);

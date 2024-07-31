@@ -10,13 +10,13 @@
     require 'conn.php';
 
     $sql = "SELECT user_alerts.from_user, withconcern_masterlist.contact_person, user_alerts.content, user_alerts.date_created
-        FROM user_accounts
-        LEFT JOIN user_alerts
-        ON user_accounts.id_number = user_alerts.id_number
-        LEFT JOIN withconcern_masterlist
-        ON user_alerts.from_user = withconcern_masterlist.from_user
-        WHERE user_accounts.id = ?";
-    
+    FROM user_accounts
+    LEFT JOIN user_alerts
+    ON user_accounts.id_number = user_alerts.id_number
+    JOIN withconcern_masterlist
+    ON user_alerts.from_user = withconcern_masterlist.from_user
+    WHERE user_accounts.id = ?";
+
     $stmt = $conn->prepare($sql);
     $params = array($id,);
     $stmt->execute($params);
@@ -24,7 +24,7 @@
 
     $inner_html = "";
     $table_empty = true;
-    if ($stmt->rowCount() > 1) {
+    if ($stmt->rowCount() > 0) {
         $table_empty = false;
         foreach($stmt->fetchAll() as $x) {
             $inner_html .= '

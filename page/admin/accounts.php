@@ -98,7 +98,7 @@
         var id = this.getAttribute('id');
 
         //checkhealth
-        console.log(id);
+        //console.log(id);
 
         $.ajax({
             url: '../../process/generate_tableswitch_content.php',
